@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app_cadastrar/styles/index.css' %}">
+    <title>Cadastre-se</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastre-se</h1>
+        
+        <form action="{% url 'Adicionardados' %}" method="post" id="registrationForm">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="card-number">Número do cartão de crédito</label>
+                <input type="text" id="card-number" name="card_number" 
+                       pattern="[0-9]{13,16}" 
+                       title="Digite os 13 a 16 dígitos do seu cartão" 
+                       required>
+            </div>
+            
+            <div class="form-group">
+                <label for="card-holder">Nome do titular</label>
+                <input type="text" id="card-holder" name="card_holder" 
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="expiry-date">Data de validade (MM/AAAA)</label>
+                <input type="text" id="expiry-date" name="expiry_date" 
+                       pattern="(0[1-9]|1[0-2])\/[0-9]{4}" 
+                       title="Digite no formato MM/AAAA (ex: 12/2025)" 
+                       placeholder="MM/AAAA" 
+                       required>
+            </div>
+            
+            <div class="form-group">
+                <label for="card-cvv">Código de segurança (CVV)</label>
+                <input type="text" id="cvv" name="cvv" 
+                       pattern="[0-9]{3,4}" 
+                       title="Digite os 3 ou 4 dígitos do CVV" 
+                       maxlength="4" 
+                       required>
+            </div>
+            
+            <button type="submit">Cadastrar</button>
+        </form>
+        
+        <div class="footer">
+            <a id="Mostrar" href="{% url 'listagem_usuarios' %}">Mostrar dados</a>
+        </div>
+    </div>
+</body>
+</html>
